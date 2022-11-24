@@ -63,6 +63,9 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
         log.info("==========================" + millis + "==========================");
     }
 
+    /**
+     * 包装 ClientHttpResponse 以便于 response 可重读
+     */
     private static class ClientHttpResponseWrapper implements ClientHttpResponse {
         private final ClientHttpResponse clientHttpResponse;
         private byte[] body;

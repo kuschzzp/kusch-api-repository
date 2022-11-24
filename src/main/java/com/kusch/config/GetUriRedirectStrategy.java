@@ -9,6 +9,7 @@ import org.apache.http.impl.client.DefaultRedirectStrategy;
 import org.apache.http.protocol.HttpContext;
 
 /**
+ * 由于302会spring会自动重定向，所以需要将原始地址存一下以便后面获取
  * 重定向策略，将重定向的地址 用 RedirectUri 为key加入到响应头中
  *
  * @author Mr.kusch

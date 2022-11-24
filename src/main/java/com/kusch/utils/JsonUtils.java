@@ -11,10 +11,13 @@ import java.util.Map;
 import java.util.TimeZone;
 
 /**
- * Json转换工具类
+ * 基于 ObjectMapper 的 Json转换工具类
+ *
+ * @author Mr.kusch
+ * @date 2022/11/24 14:59
  */
 public class JsonUtils {
-    private static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     static {
         // 解决实体未包含字段反序列化时抛出异常

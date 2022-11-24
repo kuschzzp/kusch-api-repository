@@ -13,6 +13,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RestTemplateConfig 配置
+ *
+ * @author Mr.kusch
+ * @date 2022/11/24 14:56
+ */
 @Configuration
 public class RestTemplateConfig {
 
@@ -46,7 +52,7 @@ public class RestTemplateConfig {
             //            httpClientBuilder.setConnectionManager(pM);
             //
             //            //创建httpClient
-            //            HttpClient httpClient = httpClientBuilder.build();
+            //            HttpClient httpClient = httpClientBuilder.build();   不用这方式创建了
 
             //创建 HttpComponentsClientHttpRequestFactory
             HttpComponentsClientHttpRequestFactory requestFactory =
@@ -58,6 +64,7 @@ public class RestTemplateConfig {
                 e.printStackTrace();
             }
             //连接超时
+            assert requestFactory != null;
             requestFactory.setConnectTimeout(10 * 1000);
             //数据读取超时时间
             requestFactory.setReadTimeout(60 * 1000);

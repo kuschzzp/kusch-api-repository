@@ -18,6 +18,12 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 配置支持 http & https  但好像原本就是支持吧，这边配置也不是配置证书啥的
+ *
+ * @author Mr.kusch
+ * @date 2022/11/24 14:55
+ */
 public class HttpClientUtils {
 
     public static CloseableHttpClient acceptsUntrustedCertsHttpClient() throws KeyStoreException,

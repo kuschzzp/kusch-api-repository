@@ -1,6 +1,7 @@
 package com.kusch.controller;
 
-import com.kusch.service.ParseService;
+import com.kusch.constants.PlatformConstants;
+import com.kusch.handler.DownloadHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +16,23 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/download")
 @CrossOrigin
-public class DownController {
+public class DownloadController {
 
     @Autowired
-    private ParseService parseService;
+    private DownloadHandler handler;
 
+    /**
+     * 下载入口
+     *
+     * @param videoUrl 视频url
+     * @param response 响应流
+     * @return void
+     * @author Mr.kusch
+     * @date 2022/11/24 15:44
+     */
     @GetMapping("/common")
     public void getInfo(@RequestParam String videoUrl, HttpServletResponse response) {
-        response.setHeader("Access-Control-Expose-Headers", "*");
-        response.setContentType("application/octet-stream;charset=utf-8");
-        parseService.parse(videoUrl, response);
+        handler.download(PlatformConstants.getRealPlatform(videoUrl), videoUrl, response);
     }
 
 }
