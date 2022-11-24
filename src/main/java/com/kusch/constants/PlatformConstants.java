@@ -18,9 +18,9 @@ public class PlatformConstants {
     public final static String PI_PI_XIA = "pipix";
 
     public static String getRealPlatform(String url) {
-        if (url.contains("douyin")) {
+        if (url.contains(DOU_YIN)) {
             return DOU_YIN;
-        } else if (url.contains("pipix")) {
+        } else if (url.contains(PI_PI_XIA)) {
             //TODO:
             return PI_PI_XIA;
         } else {
