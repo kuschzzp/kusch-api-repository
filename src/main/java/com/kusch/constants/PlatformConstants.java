@@ -21,7 +21,7 @@ public class PlatformConstants {
         if (url.contains(DOU_YIN)) {
             return DOU_YIN;
         } else if (url.contains(PI_PI_XIA)) {
-            //TODO:
+            //TODO: more type
             return PI_PI_XIA;
         } else {
             throw new RuntimeException(url + "----暂不支持");

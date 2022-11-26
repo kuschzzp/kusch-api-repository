@@ -33,7 +33,8 @@ public class DownloadHandler implements ApplicationContextAware, InitializingBea
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
+        //将其实现类包装进一个map中
         applicationContext.getBeansOfType(DownloadService.class).forEach((k, v) -> {
             if (StringUtils.isBlank(v.platform())) {
                 return;

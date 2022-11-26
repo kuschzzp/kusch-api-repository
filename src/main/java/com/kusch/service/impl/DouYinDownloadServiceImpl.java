@@ -32,6 +32,9 @@ import java.util.regex.Pattern;
 @Slf4j
 public class DouYinDownloadServiceImpl implements DownloadService {
 
+    /**
+     * 抖音获取视频id的正则
+     */
     private static final String DOU_YIN_ID = "o/(.*)[/]?\\?";
 
     @Autowired

@@ -54,5 +54,12 @@ public interface DownloadService {
      */
     void parse(String url, HttpServletResponse response);
 
+    /**
+     * 平台，维护在常量类 PlatformConstants.java
+     *
+     * @return java.lang.String
+     * @author Mr.kusch
+     * @date 2022/11/26 16:35
+     */
     String platform();
 }

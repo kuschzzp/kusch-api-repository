@@ -17,6 +17,9 @@ import org.apache.http.protocol.HttpContext;
  */
 public class GetUriRedirectStrategy extends DefaultRedirectStrategy {
 
+    /**
+     * 存储真实的重定向地址
+     */
     public final static String REDIRECT_URI = "RedirectUri";
 
     @Override
