@@ -22,6 +22,11 @@ public class PlatformConstants {
      */
     public static final String ZUI_YOU = "xiaochuankeji";
 
+    /**
+     * 快手
+     */
+    public static final String KUAI_SHOU = "kuaishou";
+
     public static String getRealPlatform(String url) {
         if (url.contains(DOU_YIN)) {
             return DOU_YIN;
@@ -29,6 +34,8 @@ public class PlatformConstants {
             return PI_PI_XIA;
         } else if (url.contains(ZUI_YOU)) {
             return ZUI_YOU;
+        } else if (url.contains(KUAI_SHOU)) {
+            return KUAI_SHOU;
         } else {
             throw new RuntimeException(url + "----暂不支持");
         }
