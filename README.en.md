@@ -1,10 +1,13 @@
 # vedio-download
 
-#### 介绍
-使用RestTemplate进行视频下载功能
+#### Introduction
 
-#### 目前支持
+springboot uses RestTemplate to download videos
+
+#### Currently supported
+
 1. 抖音
 2. 皮皮虾
 3. 最右
 4. 快手
+5. bilibili
