@@ -10,6 +10,8 @@ springboot 使用RestTemplate进行视频下载功能。
 
 下载链接例子： http://127.0.0.1:17777/download/common?videoUrl=https://v.kuaishou.com/CHwRjS&way=0
 
+way参数：0代表使用流下载，1代表直接返回视频下载链接
+
 #### 目前支持
 
 1. 抖音
