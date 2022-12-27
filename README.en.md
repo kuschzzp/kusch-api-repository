@@ -4,6 +4,8 @@
 
 springboot uses RestTemplate to download videos
 
+Example： http://127.0.0.1:17777/download/common?videoUrl=https://v.kuaishou.com/CHwRjS&way=0
+
 #### Currently supported
 
 1. 抖音
