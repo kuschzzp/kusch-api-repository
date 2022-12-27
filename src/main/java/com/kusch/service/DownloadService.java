@@ -47,12 +47,13 @@ public interface DownloadService {
      * 解析并获取响应内容
      *
      * @param url      分享链接
+     * @param way      下载方式   0 流下载  1 直接返回URL
      * @param response 响应流
      * @return void
      * @author Mr.kusch
      * @date 2022/11/24 15:06
      */
-    void parse(String url, HttpServletResponse response);
+    void parse(String url, String way, HttpServletResponse response);
 
     /**
      * 平台，维护在常量类 PlatformConstants.java

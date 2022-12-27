@@ -46,17 +46,17 @@ public class KuaiShouDownloadServiceImpl implements DownloadService {
     private static final String KUAI_SHOU_URL = "\"photoUrl\":\"(.*)\",\"lik";
 
     @Override
-    public void parse(String url, HttpServletResponse response) {
+    public void parse(String url, String way, HttpServletResponse response) {
 
         try {
-            kuaishou(url, response);
+            kuaishou(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
 
     }
 
-    private void kuaishou(String url, HttpServletResponse response) throws IOException {
+    private void kuaishou(String url, String way, HttpServletResponse response) throws IOException {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
         HttpHeaders headers = forEntity.getHeaders();
         List<String> list = headers.get(GetUriRedirectStrategy.REDIRECT_URI);
@@ -70,7 +70,10 @@ public class KuaiShouDownloadServiceImpl implements DownloadService {
             }
             Assert.isTrue(StringUtils.isNotBlank(id), "正则匹配出错！");
             HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.add("Cookie", "clientid=3; did=web_48e73bf3f7a9444391f356155b16f021; didv=1669731954000; kpf=PC_WEB; kpn=KUAISHOU_VISION");
+            //TODO: Cookie看看到点了会不会过期，如果会就难受了    expires=Wed, 27 Dec 2023 00:58:03 GMT;
+            httpHeaders.add("Cookie",
+                    "did=web_666cd622737a41f99c84ce28c94943ff; path=/;" +
+                            "domain=kuaishou.com");
             HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(httpHeaders);
             ResponseEntity<String> entity = restTemplate.exchange("https://www.kuaishou.com/short-video/" + id,
                     HttpMethod.GET, httpEntity, String.class);
@@ -83,13 +86,18 @@ public class KuaiShouDownloadServiceImpl implements DownloadService {
             while (matcher1.find()) {
                 toDownloadUrl = matcher1.group(1);
             }
-            ResponseEntity<byte[]> responseEntity
-                    = restTemplate.getForEntity(toDownloadUrl, byte[].class);
-            byte[] body = responseEntity.getBody();
-            if (body != null && body.length > 0) {
-                download(response, "快手视频", body);
+            if (way.equals(PlatformConstants.DOWNLOAD_STREAM)) {
+                ResponseEntity<byte[]> responseEntity
+                        = restTemplate.getForEntity(toDownloadUrl, byte[].class);
+                byte[] body = responseEntity.getBody();
+                if (body != null && body.length > 0) {
+                    download(response, "快手视频", body);
+                } else {
+                    log.warn("{}----响应体没有内容" + this.getClass().getName());
+                }
             } else {
-                log.warn("{}----响应体没有内容" + this.getClass().getName());
+                response.setHeader("content-type", "text/html;charset=utf-8");
+                response.getWriter().write(toDownloadUrl);
             }
         } else {
             log.warn("请求返回结果中没有location！！");

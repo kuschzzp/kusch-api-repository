@@ -35,22 +35,22 @@ public class DouYinDownloadServiceImpl implements DownloadService {
     /**
      * 抖音获取视频id的正则
      */
-    private static final String DOU_YIN_ID = "o/(.*)[/]?\\?";
+    private static final String DOU_YIN_ID = "o/(.*)/\\?";
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Override
-    public void parse(String url, HttpServletResponse response) {
+    public void parse(String url, String way, HttpServletResponse response) {
         try {
-            douyin(url, response);
+            douyin(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
     }
 
     @SuppressWarnings("unchecked")
-    private void douyin(String url, HttpServletResponse response) throws IOException {
+    private void douyin(String url, String way, HttpServletResponse response) throws IOException {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
         HttpHeaders headers = forEntity.getHeaders();
         List<String> list = headers.get(GetUriRedirectStrategy.REDIRECT_URI);
@@ -64,26 +64,31 @@ public class DouYinDownloadServiceImpl implements DownloadService {
             }
             Assert.isTrue(StringUtils.isNotBlank(id), "正则匹配出错！");
             ResponseEntity<String> entity = restTemplate.getForEntity("https://www.iesdouyin" +
-                            ".com/web/api/v2/aweme/iteminfo/?item_ids=" + id,
+                            ".com/aweme/v1/web/aweme/detail/?aweme_id=" + id,
                     String.class);
             //处理返回信息中的unicode编码
             String decode = CommonUtils.unicodeDecode(entity.getBody());
             Map<String, Object> stringObjectMap = JsonUtils.jsonToMap(decode);
             //根据层级获取真实地址
-            List<Map<String, Object>> itemList = (List<Map<String, Object>>) stringObjectMap.get("item_list");
-            Map<String, Object> map = (Map<String, Object>) itemList.get(0).get("video");
-            Map<String, Object> playAddr = (Map<String, Object>) map.get("play_addr");
-            List<String> urlList = (List<String>) playAddr.get("url_list");
-            String toDownloadUrl = urlList.get(0).replaceFirst("playwm", "play");
+            Map<String, Object> detail = (Map<String, Object>) stringObjectMap.get("aweme_detail");
+            Map<String, Object> video = (Map<String, Object>) detail.get("video");
+            Map<String, Object> playAddr = (Map<String, Object>) video.get("play_addr");
+            List<String> urls = (List<String>) playAddr.get("url_list");
+            String toDownloadUrl = urls.get(0);
 
-            ResponseEntity<byte[]> responseEntity
-                    = restTemplate.getForEntity(toDownloadUrl, byte[].class);
-            String filename = (String) itemList.get(0).get("desc");
-            byte[] body = responseEntity.getBody();
-            if (body != null && body.length > 0) {
-                download(response, filename, body);
+            if (way.equals(PlatformConstants.DOWNLOAD_STREAM)) {
+                ResponseEntity<byte[]> responseEntity
+                        = restTemplate.getForEntity(toDownloadUrl, byte[].class);
+                String filename = (String) detail.get("desc");
+                byte[] body = responseEntity.getBody();
+                if (body != null && body.length > 0) {
+                    download(response, filename, body);
+                } else {
+                    log.warn("{}----响应体没有内容" + this.getClass().getName());
+                }
             } else {
-                log.warn("{}----响应体没有内容" + this.getClass().getName());
+                response.setHeader("content-type", "text/html;charset=utf-8");
+                response.getWriter().write(toDownloadUrl);
             }
         } else {
             log.warn("请求返回结果中没有location！！");

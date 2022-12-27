@@ -30,30 +30,35 @@ public class ZuiYouDownloadServiceImpl implements DownloadService {
     private RestTemplate restTemplate;
 
     @Override
-    public void parse(String url, HttpServletResponse response) {
+    public void parse(String url, String way, HttpServletResponse response) {
 
         try {
-            zuiyou(url, response);
+            zuiyou(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
 
     }
 
-    private void zuiyou(String url, HttpServletResponse response) throws IOException {
+    private void zuiyou(String url, String way, HttpServletResponse response) throws IOException {
         ResponseEntity<String> entity = restTemplate.postForEntity(url, new LinkedMultiValueMap<>(), String.class);
         Document document = Jsoup.parse(Objects.requireNonNull(entity.getBody()));
         String filename = document.getElementsByTag("title").text().replace(" - 最右", "");
         Elements attributeValue = document.getElementsByAttributeValue("preload", "metadata");
         String toDownloadUrl = attributeValue.get(0).attr("src");
-        ResponseEntity<byte[]> responseEntity
-                = restTemplate.getForEntity(toDownloadUrl, byte[].class);
 
-        byte[] body = responseEntity.getBody();
-        if (body != null && body.length > 0) {
-            download(response, filename, body);
+        if (way.equals(PlatformConstants.DOWNLOAD_STREAM)) {
+            ResponseEntity<byte[]> responseEntity
+                    = restTemplate.getForEntity(toDownloadUrl, byte[].class);
+            byte[] body = responseEntity.getBody();
+            if (body != null && body.length > 0) {
+                download(response, filename, body);
+            } else {
+                log.warn("{}----响应体没有内容" + this.getClass().getName());
+            }
         } else {
-            log.warn("{}----响应体没有内容" + this.getClass().getName());
+            response.setHeader("content-type", "text/html;charset=utf-8");
+            response.getWriter().write(toDownloadUrl);
         }
     }
 

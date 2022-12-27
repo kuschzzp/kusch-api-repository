@@ -53,7 +53,7 @@ public class DownloadHandler implements ApplicationContextAware, InitializingBea
      * @author Mr.kusch
      * @date 2022/11/24 15:32
      */
-    public void download(String type, String url, HttpServletResponse response) {
-        handlerMap.get(type).parse(url, response);
+    public void download(String type, String url, String way, HttpServletResponse response) {
+        handlerMap.get(type).parse(url, way, response);
     }
 }

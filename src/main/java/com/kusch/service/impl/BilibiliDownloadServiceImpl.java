@@ -39,10 +39,10 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
     private RestTemplate restTemplate;
 
     @Override
-    public void parse(String url, HttpServletResponse response) {
+    public void parse(String url, String way, HttpServletResponse response) {
 
         try {
-            bilibili(url, response);
+            bilibili(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -50,7 +50,7 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
     }
 
     @SuppressWarnings("unchecked")
-    private void bilibili(String url, HttpServletResponse response) throws IOException {
+    private void bilibili(String url, String way, HttpServletResponse response) throws IOException {
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         Document document = Jsoup.parse(Objects.requireNonNull(entity.getBody()));
         String filename = document.getElementsByTag("title").text().replace("_哔哩哔哩_bilibili", "");
@@ -70,26 +70,32 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
         Map<String, Object> videoIndo = video.get(0);
         String toDownloadUrl = (String) videoIndo.get("baseUrl");
 
+        if (way.equals(PlatformConstants.DOWNLOAD_STREAM)) {
 
-        //这个比较特殊，需要携带 referer 请求头
-        String referer = "";
-        if (url.contains(PlatformConstants.BILIBILI_PHONE)) {
-            referer = "https://www.bilibili.com" + entity.getHeaders().get(GetUriRedirectStrategy.REDIRECT_URI).get(0);
+            //这个比较特殊，需要携带 referer 请求头
+            String referer = "";
+            if (url.contains(PlatformConstants.BILIBILI_PHONE)) {
+                referer =
+                        "https://www.bilibili.com" + entity.getHeaders().get(GetUriRedirectStrategy.REDIRECT_URI).get(0);
+            } else {
+                referer = url;
+            }
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("referer", referer);
+
+            ResponseEntity<byte[]> responseEntity
+                    = restTemplate.exchange(toDownloadUrl, HttpMethod.GET, new HttpEntity<>(httpHeaders), byte[].class);
+
+            byte[] body = responseEntity.getBody();
+            if (body != null && body.length > 0) {
+                download(response, filename, body);
+            } else {
+                log.warn("{}----响应体没有内容" + this.getClass().getName());
+            }
         } else {
-            referer = url;
-        }
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("referer", referer);
-
-        ResponseEntity<byte[]> responseEntity
-                = restTemplate.exchange(toDownloadUrl, HttpMethod.GET, new HttpEntity<>(httpHeaders), byte[].class);
-
-        byte[] body = responseEntity.getBody();
-        if (body != null && body.length > 0) {
-            download(response, filename, body);
-        } else {
-            log.warn("{}----响应体没有内容" + this.getClass().getName());
+            response.setHeader("content-type", "text/html;charset=utf-8");
+            response.getWriter().write("该站点不支持使用URL方式！不信你试试：  " + toDownloadUrl);
         }
     }
 

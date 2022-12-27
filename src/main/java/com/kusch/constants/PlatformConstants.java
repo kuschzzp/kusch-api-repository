@@ -58,4 +58,23 @@ public class PlatformConstants {
             throw new RuntimeException(url + "----暂不支持");
         }
     }
+
+
+    //******************************************其他常量******************************************
+
+    /**
+     * 把链接丢响应头里面去
+     */
+    public static final String REAL_URL = "real_url";
+
+    /**
+     * 流返回
+     */
+    public static final String DOWNLOAD_STREAM = "0";
+
+    /**
+     * URL返回
+     */
+    public static final String DOWNLOAD_URL = "1";
+
 }

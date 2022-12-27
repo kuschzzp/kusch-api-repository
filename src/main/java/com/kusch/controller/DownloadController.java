@@ -23,16 +23,20 @@ public class DownloadController {
 
     /**
      * 下载入口
+     * 例如：127.0.0.1:17777/download/common?videoUrl=https://v.kuaishou.com/CHwRjS&way=0
      *
      * @param videoUrl 视频url
+     * @param way      下载方式   0 流下载  1 直接返回URL
      * @param response 响应流
      * @return void
      * @author Mr.kusch
      * @date 2022/11/24 15:44
      */
     @GetMapping("/common")
-    public void getInfo(@RequestParam String videoUrl, HttpServletResponse response) {
-        handler.download(PlatformConstants.getRealPlatform(videoUrl), videoUrl, response);
+    public void getInfo(@RequestParam String videoUrl,
+                        @RequestParam String way,
+                        HttpServletResponse response) {
+        handler.download(PlatformConstants.getRealPlatform(videoUrl), videoUrl, way, response);
     }
 
 }

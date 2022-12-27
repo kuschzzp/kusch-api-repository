@@ -48,10 +48,10 @@ public class PiPiXiaDownloadServiceImpl implements DownloadService {
     private RestTemplate restTemplate;
 
     @Override
-    public void parse(String url, HttpServletResponse response) {
+    public void parse(String url, String way, HttpServletResponse response) {
 
         try {
-            pipixia(url, response);
+            pipixia(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -59,7 +59,7 @@ public class PiPiXiaDownloadServiceImpl implements DownloadService {
     }
 
     @SuppressWarnings("unchecked")
-    private void pipixia(String url, HttpServletResponse response) throws IOException {
+    private void pipixia(String url, String way, HttpServletResponse response) throws IOException {
         //第一步还是获取ID
         ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
         HttpHeaders headers = forEntity.getHeaders();
@@ -86,14 +86,20 @@ public class PiPiXiaDownloadServiceImpl implements DownloadService {
             List<HashMap<String, Object>> vediosUrls = (List<HashMap<String, Object>>) vedios.get("url_list");
             String toDownloadUrl = (String) vediosUrls.get(0).get("url");
 
-            ResponseEntity<byte[]> responseEntity
-                    = restTemplate.getForEntity(toDownloadUrl, byte[].class);
-            String filename = (String) itemData.get("content");
-            byte[] body = responseEntity.getBody();
-            if (body != null && body.length > 0) {
-                download(response, filename, body);
+            if (way.equals(PlatformConstants.DOWNLOAD_STREAM)) {
+                ResponseEntity<byte[]> responseEntity
+                        = restTemplate.getForEntity(toDownloadUrl, byte[].class);
+                String filename = (String) itemData.get("content");
+                filename = StringUtils.isBlank(filename) ? "pipixia" : filename;
+                byte[] body = responseEntity.getBody();
+                if (body != null && body.length > 0) {
+                    download(response, filename, body);
+                } else {
+                    log.warn("{}----响应体没有内容" + this.getClass().getName());
+                }
             } else {
-                log.warn("{}----响应体没有内容" + this.getClass().getName());
+                response.setHeader("content-type", "text/html;charset=utf-8");
+                response.getWriter().write(toDownloadUrl);
             }
         } else {
             log.warn("请求返回结果中没有location！！");
