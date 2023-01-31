@@ -1,6 +1,6 @@
 package com.kusch.service.impl;
 
-import com.kusch.config.GetUriRedirectStrategy;
+import com.kusch.constants.CommonConstants;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.service.DownloadService;
 import com.kusch.utils.CommonUtils;
@@ -63,7 +63,7 @@ public class PiPiXiaDownloadServiceImpl implements DownloadService {
         //第一步还是获取ID
         ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
         HttpHeaders headers = forEntity.getHeaders();
-        List<String> list = headers.get(GetUriRedirectStrategy.REDIRECT_URI);
+        List<String> list = headers.get(CommonConstants.REDIRECT_URI);
         if (!CollectionUtils.isEmpty(list)) {
             String locationUrl = list.get(0);
             Pattern pt = Pattern.compile(PI_PI_XIA_ID);

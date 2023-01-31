@@ -1,5 +1,6 @@
 package com.kusch.config;
 
+import com.kusch.constants.CommonConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpRequest;
@@ -17,22 +18,17 @@ import org.apache.http.protocol.HttpContext;
  */
 public class GetUriRedirectStrategy extends DefaultRedirectStrategy {
 
-    /**
-     * 存储真实的重定向地址
-     */
-    public final static String REDIRECT_URI = "RedirectUri";
-
     @Override
     public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) throws ProtocolException {
         boolean redirected = super.isRedirected(request, response, context);
         Header[] allHeaders = response.getAllHeaders();
         for (Header header : allHeaders) {
             if (StringUtils.equals(header.getName(), "Location")) {
-                context.setAttribute(REDIRECT_URI, header.getValue());
+                context.setAttribute(CommonConstants.REDIRECT_URI, header.getValue());
             }
         }
-        Object uri = context.getAttribute(REDIRECT_URI);
-        response.setHeader(REDIRECT_URI, String.valueOf(uri));
+        Object uri = context.getAttribute(CommonConstants.REDIRECT_URI);
+        response.setHeader(CommonConstants.REDIRECT_URI, String.valueOf(uri));
         return redirected;
     }
 }

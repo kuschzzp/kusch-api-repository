@@ -65,9 +65,9 @@ public class RestTemplateConfig {
             }
             //连接超时
             assert requestFactory != null;
-            requestFactory.setConnectTimeout(10 * 1000);
+            requestFactory.setConnectTimeout(20 * 1000);
             //数据读取超时时间
-            requestFactory.setReadTimeout(60 * 1000);
+            requestFactory.setReadTimeout(120 * 1000);
             //连接不够用的等待时间
             requestFactory.setConnectionRequestTimeout(30 * 1000);
 

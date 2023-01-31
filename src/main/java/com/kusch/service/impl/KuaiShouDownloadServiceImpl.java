@@ -1,6 +1,6 @@
 package com.kusch.service.impl;
 
-import com.kusch.config.GetUriRedirectStrategy;
+import com.kusch.constants.CommonConstants;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.service.DownloadService;
 import com.kusch.utils.CommonUtils;
@@ -59,7 +59,7 @@ public class KuaiShouDownloadServiceImpl implements DownloadService {
     private void kuaishou(String url, String way, HttpServletResponse response) throws IOException {
         ResponseEntity<String> forEntity = restTemplate.getForEntity(url, String.class);
         HttpHeaders headers = forEntity.getHeaders();
-        List<String> list = headers.get(GetUriRedirectStrategy.REDIRECT_URI);
+        List<String> list = headers.get(CommonConstants.REDIRECT_URI);
         if (!CollectionUtils.isEmpty(list)) {
             String locationUrl = list.get(0);
             Pattern pt = Pattern.compile(KUAI_SHOU_ID);

@@ -27,7 +27,7 @@ public class DownloadController {
     private ClashNodeService clashNodeService;
 
     /**
-     * 下载入口
+     * 视频下载的统一入口<br/>
      * 例如：127.0.0.1:17777/download/common?videoUrl=https://v.kuaishou.com/CHwRjS&way=0
      *
      * @param videoUrl 视频url

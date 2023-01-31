@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2022/11/24 14:59
  */
 @SpringBootApplication
-public class VedioDownloadApplication {
+public class ApiRepositoryApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(VedioDownloadApplication.class, args);
+        SpringApplication.run(ApiRepositoryApplication.class, args);
     }
 
 }

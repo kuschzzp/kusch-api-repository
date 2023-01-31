@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kusch</groupId>
-    <artifactId>vedio-download</artifactId>
+    <artifactId>kusch-api-repository</artifactId>
     <version>0.0.1</version>
-    <name>vedio-download</name>
-    <description>vedio-download</description>
+    <name>kusch-api-repository</name>
+    <description>kusch-api-repository</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -64,7 +64,7 @@
     </dependencies>
 
     <build>
-        <finalName>video-download</finalName>
+        <finalName>kusch-api-repository</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

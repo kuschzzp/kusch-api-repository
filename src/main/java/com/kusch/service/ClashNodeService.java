@@ -18,7 +18,6 @@ public interface ClashNodeService {
      * @param type
      * @return
      */
-    void getTaregtClashNodeService(String type, HttpServletRequest request,
-                                     HttpServletResponse response);
+    void getTaregtClashNodeService(String type, HttpServletRequest request, HttpServletResponse response);
 
 }

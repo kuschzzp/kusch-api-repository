@@ -1,6 +1,6 @@
 package com.kusch.service.impl;
 
-import com.kusch.config.GetUriRedirectStrategy;
+import com.kusch.constants.CommonConstants;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.service.DownloadService;
 import com.kusch.utils.JsonUtils;
@@ -76,7 +76,7 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
             String referer = "";
             if (url.contains(PlatformConstants.BILIBILI_PHONE)) {
                 referer =
-                        "https://www.bilibili.com" + entity.getHeaders().get(GetUriRedirectStrategy.REDIRECT_URI).get(0);
+                        "https://www.bilibili.com" + entity.getHeaders().get(CommonConstants.REDIRECT_URI).get(0);
             } else {
                 referer = url;
             }
