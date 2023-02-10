@@ -21,8 +21,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,7 +58,7 @@ public class ClashNodeServiceImpl implements ClashNodeService {
 
         if (!"txt".equals(type) && !"yaml".equals(type)) {
             try {
-                response.getWriter().write("仅支持txt和yaml两个值！");
+                response.getWriter().write("仅支持 txt 和 yaml 两个值！");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -75,13 +73,13 @@ public class ClashNodeServiceImpl implements ClashNodeService {
         }
 
         try {
-            doResponse(result, response);
+            doResponse(result, response, type);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void doResponse(String realUrl, HttpServletResponse response) throws IOException {
+    private void doResponse(String realUrl, HttpServletResponse response, String type) throws IOException {
         File historyFile = new File("./history.txt");
         if (!historyFile.exists()) {
             boolean create = historyFile.createNewFile();
@@ -109,7 +107,7 @@ public class ClashNodeServiceImpl implements ClashNodeService {
         response.setHeader("Access-Control-Expose-Headers", "*");
         response.setContentType("application/octet-stream;charset=utf-8");
         response.setHeader("Content-Disposition",
-                "attachment;filename=" + "freeNodeEveryDay.yaml");
+                "attachment;filename=" + "freeNodeEveryDay." + type);
         IOUtils.copy(new ByteArrayInputStream(body), response.getOutputStream());
     }
 }
