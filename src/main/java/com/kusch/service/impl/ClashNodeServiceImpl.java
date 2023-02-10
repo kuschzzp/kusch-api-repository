@@ -109,7 +109,7 @@ public class ClashNodeServiceImpl implements ClashNodeService {
         response.setHeader("Access-Control-Expose-Headers", "*");
         response.setContentType("application/octet-stream;charset=utf-8");
         response.setHeader("Content-Disposition",
-                "attachment;filename=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + ".yaml");
+                "attachment;filename=" + "freeNodeEveryDay.yaml");
         IOUtils.copy(new ByteArrayInputStream(body), response.getOutputStream());
     }
 }

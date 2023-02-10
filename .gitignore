@@ -41,3 +41,5 @@ build/
 .vscode/
 
 logs
+
+history.txt
