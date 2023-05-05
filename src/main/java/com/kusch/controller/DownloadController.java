@@ -3,7 +3,10 @@ package com.kusch.controller;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.handler.DownloadHandler;
 import com.kusch.service.ClashNodeService;
+import com.kusch.utils.IpUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/download")
 @CrossOrigin
+@Slf4j
 public class DownloadController {
 
     @Autowired
@@ -59,4 +63,14 @@ public class DownloadController {
         clashNodeService.getTaregtClashNodeService(type, request, response);
     }
 
+
+    /**
+     * 获取真实ip地址,不返回内网地址
+     */
+    @GetMapping("/ip")
+    public String getIpAddr(HttpServletRequest request) {
+        String ipAddr = IpUtil.getIpAddr(request);
+        log.info("本次请求的IP是："+ ipAddr);
+        return ipAddr;
+    }
 }
