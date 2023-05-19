@@ -3,7 +3,7 @@ package com.kusch.service;
 /**
  * 定时签到的Service
  */
-public interface SignService {
+public interface HhmSignService {
 
     /**
      * 哼哼猫签到
@@ -13,6 +13,6 @@ public interface SignService {
      * @author Mr.kusch
      * @date 2023/5/5 15:45
      */
-    void hengHengMaoSign();
+    void hengHengMaoSign() throws InterruptedException;
 
 }

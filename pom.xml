@@ -62,6 +62,19 @@
             <version>1.15.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.dtflys.forest</groupId>
+            <artifactId>forest-spring-boot-starter</artifactId>
+            <version>1.5.26</version>
+        </dependency>
+
+        <!-- ELK相关 -->
+<!--        <dependency>-->
+<!--            <groupId>net.logstash.logback</groupId>-->
+<!--            <artifactId>logstash-logback-encoder</artifactId>-->
+<!--            <version>7.3</version>-->
+<!--        </dependency>-->
+
 
         <!-- 使自定义的配置信息有提示 -->
         <dependency>
