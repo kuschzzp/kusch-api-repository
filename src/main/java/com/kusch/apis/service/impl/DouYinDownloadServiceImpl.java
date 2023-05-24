@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,7 +74,7 @@ public class DouYinDownloadServiceImpl implements DownloadService {
         data.put("userAgent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
                 "Chrome/109.0.0.0 Safari/537.36");
         HttpEntity<String> entity = new HttpEntity<>(data.toString(), headers);
-        ResponseEntity<String> responsex = restTemplate.postForEntity("https://tiktok-signature-rose.vercel.app/",
+        ResponseEntity<String> responsex = restTemplate.postForEntity("http://49.235.29.74:19999/",
                 entity,
                 String.class);
         JSONObject jsonObject = new JSONObject(responsex.getBody());
