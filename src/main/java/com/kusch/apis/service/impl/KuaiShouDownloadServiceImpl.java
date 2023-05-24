@@ -6,8 +6,8 @@ import com.kusch.constants.PlatformConstants;
 import com.kusch.constants.RequestConstants;
 import com.kusch.ex.ApiException;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
