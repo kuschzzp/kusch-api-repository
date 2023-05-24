@@ -25,6 +25,6 @@
 
 ### 获取每日白嫖的clashnode节点接口，可以直接将这个链接填入 clash
 
-http://127.0.0.1:17777/clashNode?type=yaml
+http://127.0.0.1:17777/freeNode?type=yaml
 
 > 源网站仅有 txt 和 yaml 格式的，想要哪种，改type
