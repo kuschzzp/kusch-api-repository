@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @date 2022/11/24 14:59
  */
 @SpringBootApplication
-@EnableScheduling //开启定时任务
+@EnableScheduling
 public class ApiRepositoryApplication {
 
     public static void main(String[] args) {

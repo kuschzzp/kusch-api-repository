@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <contextName>vedio-download</contextName>
+    <contextName>kusch-api-repository</contextName>
+
+    <!-- spring中的模板，开启这个下面配置带颜色的就不要开了，不然就重复了 -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
     <!-- property标签可用于自定义属性，比如定义一个，然后使用${LOG_HOME}去引用它 -->
     <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg %n"/>
     <!--
@@ -9,7 +13,8 @@
         “%white”, “%gray”, “%boldRed”,“%boldGreen”, “%boldYellow”, “%boldBlue”,
         “%boldMagenta”“%boldCyan”,“%boldWhite” , “%highlight”
     -->
-    <property name="pattern-color" value="%yellow(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %highlight(%-5level) %green(%logger{50}) - %boldCyan(%msg) %n"/>
+    <property name="pattern-color"
+              value="%yellow(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %highlight(%-5level) %green(%logger{50}) - %boldCyan(%msg) %n"/>
     <property name="LOG_HOME" value="logs"/>
 
     <!-- 控制台输出 -->
@@ -44,43 +49,42 @@
     </appender>
 
     <!-- ELK相关 -->
-<!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
-<!--    <springProperty scope="context" name="applicationName" source="spring.application.name"/>-->
+    <!--    <springProperty scope="context" name="applicationName" source="spring.application.name"/>-->
 
-<!--    <appender name="infoLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-<!--        <destination>43.137.2.182:4560</destination>-->
-<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--            &lt;!&ndash;添加applicationName字段 &ndash;&gt;-->
-<!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <!--    <appender name="infoLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>43.137.2.182:4560</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+    <!--            &lt;!&ndash;添加applicationName字段 &ndash;&gt;-->
+    <!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
 
-<!--    <appender name="operationLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-<!--        <destination>43.137.2.182:4570</destination>-->
-<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <!--    <appender name="operationLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>43.137.2.182:4570</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+    <!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
 
-<!--    <appender name="securityLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-<!--        <destination>43.137.2.182:4580</destination>-->
-<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <!--    <appender name="securityLogstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--        <destination>43.137.2.182:4580</destination>-->
+    <!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+    <!--            <customFields>{"applicationName":"${applicationName}"}</customFields>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
 
-<!--    <logger name="operation" level="info">-->
-<!--        <appender-ref ref="operationLogstash"/>-->
-<!--    </logger>-->
+    <!--    <logger name="operation" level="info">-->
+    <!--        <appender-ref ref="operationLogstash"/>-->
+    <!--    </logger>-->
 
-<!--    <logger name="security" level="info">-->
-<!--        <appender-ref ref="securityLogstash"/>-->
-<!--    </logger>-->
+    <!--    <logger name="security" level="info">-->
+    <!--        <appender-ref ref="securityLogstash"/>-->
+    <!--    </logger>-->
 
     <root level="INFO">
         <!-- 输入ELK --><!-- ELK相关 -->
-<!--        <appender-ref ref="infoLogstash"/>-->
-        <appender-ref ref="CONSOLE-WITH-COLOR"/>
+        <!--        <appender-ref ref="infoLogstash"/>-->
+        <!--        <appender-ref ref="CONSOLE-WITH-COLOR"/>-->
         <appender-ref ref="FILE"/>
     </root>
 

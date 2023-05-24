@@ -1,6 +1,6 @@
-package com.kusch.service.impl;
+package com.kusch.apis.service.impl;
 
-import com.kusch.service.ClashNodeService;
+import com.kusch.apis.service.ClashNodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +58,7 @@ public class ClashNodeServiceImpl implements ClashNodeService {
 
         if (!"txt".equals(type) && !"yaml".equals(type)) {
             try {
-                response.getWriter().write("仅支持 txt 和 yaml 两个值！");
+                response.getOutputStream().write("仅支持 txt 和 yaml 两个值！".getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }

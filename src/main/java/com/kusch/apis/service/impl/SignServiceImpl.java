@@ -1,10 +1,11 @@
-package com.kusch.service.impl;
+package com.kusch.apis.service.impl;
 
 import cn.hutool.crypto.digest.MD5;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestHeader;
 import com.dtflys.forest.http.ForestResponse;
-import com.kusch.service.HhmSignService;
+import com.kusch.apis.service.SignService;
+import com.kusch.utils.UnicodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-public class HhmSignServiceImpl implements HhmSignService {
+public class SignServiceImpl implements SignService {
 
     private static final Map<String, String> INIT_MAP = new HashMap<>();
 
@@ -45,7 +46,7 @@ public class HhmSignServiceImpl implements HhmSignService {
                 Forest.post("https://video.baoge.vip/user/login.php")
                         .addBody("user=" + user + "&pass=" + pass)
                         .execute(ForestResponse.class);
-        log.info(user + "登陆：  " + response.getContent());
+        log.info("用户：{}, 登陆：{}", user, response.getContent());
         String cookie =
                 response.getHeaders().getHeaders("Set-Cookie")
                         .stream().map(ForestHeader::getValue)
@@ -88,7 +89,7 @@ public class HhmSignServiceImpl implements HhmSignService {
                         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) " +
                                 "Chrome/113.0.0.0 Safari/537.36")
                 .execute(ForestResponse.class);
-        log.info(user + "签到" + qandao.getContent());
+        log.info("用户: {}, 签到：{}", user, UnicodeUtils.unicodeDecode(qandao.getContent()));
 
     }
 }

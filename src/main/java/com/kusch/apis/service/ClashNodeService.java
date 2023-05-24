@@ -1,4 +1,4 @@
-package com.kusch.service;
+package com.kusch.apis.service;
 
 
 import javax.servlet.http.HttpServletRequest;

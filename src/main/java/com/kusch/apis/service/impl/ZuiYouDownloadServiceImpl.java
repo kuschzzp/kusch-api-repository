@@ -1,7 +1,9 @@
-package com.kusch.service.impl;
+package com.kusch.apis.service.impl;
 
+import com.kusch.apis.service.DownloadService;
 import com.kusch.constants.PlatformConstants;
-import com.kusch.service.DownloadService;
+import com.kusch.ex.ApiException;
+import com.kusch.result.R;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,6 +38,7 @@ public class ZuiYouDownloadServiceImpl implements DownloadService {
             zuiyou(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
+            throw new ApiException(e.getMessage());
         }
 
     }
@@ -58,7 +61,7 @@ public class ZuiYouDownloadServiceImpl implements DownloadService {
             }
         } else {
             response.setHeader("content-type", "text/html;charset=utf-8");
-            response.getWriter().write(toDownloadUrl);
+            response.getOutputStream().write(toDownloadUrl.getBytes());
         }
     }
 

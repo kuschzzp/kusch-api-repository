@@ -1,6 +1,6 @@
-package com.kusch.handler;
+package com.kusch.apis.handler;
 
-import com.kusch.service.DownloadService;
+import com.kusch.apis.service.DownloadService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class DownloadHandler implements ApplicationContextAware, InitializingBean {
+
     /**
      * 具体实现类Map
      */
@@ -28,6 +29,7 @@ public class DownloadHandler implements ApplicationContextAware, InitializingBea
     private ApplicationContext applicationContext;
 
     @Override
+    @SuppressWarnings("all")
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
@@ -49,9 +51,6 @@ public class DownloadHandler implements ApplicationContextAware, InitializingBea
      * @param type     见 PlatformConstants.java
      * @param url      参数
      * @param response 响应流
-     * @return void
-     * @author Mr.kusch
-     * @date 2022/11/24 15:32
      */
     public void download(String type, String url, String way, HttpServletResponse response) {
         handlerMap.get(type).parse(url, way, response);

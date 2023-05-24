@@ -1,9 +1,11 @@
 package com.kusch.constants;
 
+import com.kusch.ex.ApiException;
+
 /**
  * 支持平台的常量
  *
- * @author Zhangzp
+ * @author Mr.Kusch
  * @date 2022年11月24日 15:26
  */
 public class PlatformConstants {
@@ -55,10 +57,9 @@ public class PlatformConstants {
         } else if (url.contains(BILIBILI_PHONE) || url.contains(BILIBILI_WEB)) {
             return BILIBILI;
         } else {
-            throw new RuntimeException(url + "----暂不支持");
+            throw new ApiException(url + "----暂不支持该平台");
         }
     }
-
 
     //******************************************其他常量******************************************
 

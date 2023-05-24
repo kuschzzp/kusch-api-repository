@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author Mr.kusch
  * @date 2022年11月23日 10:34
  */
-public class CommonUtils {
+public class UnicodeUtils {
 
     private static final String UNICODE_PATTERN = "(\\\\u(\\p{XDigit}{4}))";
 

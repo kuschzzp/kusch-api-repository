@@ -1,4 +1,4 @@
-package com.kusch.service;
+package com.kusch.apis.service;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
@@ -27,7 +27,6 @@ public interface DownloadService {
      * @date 2022/11/24 15:05
      */
     default void download(HttpServletResponse response, String filename, byte[] body) throws IOException {
-        response.setHeader("Access-Control-Expose-Headers", "*");
         response.setContentType("application/octet-stream;charset=utf-8");
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
         // 此处的编码是文件名的编码，使能正确显示中文文件名

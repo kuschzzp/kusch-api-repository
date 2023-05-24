@@ -13,6 +13,9 @@
     <version>0.0.1</version>
     <name>kusch-api-repository</name>
     <description>kusch-api-repository</description>
+
+    <packaging>jar</packaging>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -65,7 +68,7 @@
         <dependency>
             <groupId>com.dtflys.forest</groupId>
             <artifactId>forest-spring-boot-starter</artifactId>
-            <version>1.5.26</version>
+            <version>1.5.31</version>
         </dependency>
 
         <!-- ELK相关 -->
@@ -74,6 +77,11 @@
 <!--            <artifactId>logstash-logback-encoder</artifactId>-->
 <!--            <version>7.3</version>-->
 <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
 
 
         <!-- 使自定义的配置信息有提示 -->

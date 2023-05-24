@@ -25,19 +25,18 @@ import java.util.Objects;
 @Slf4j
 public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInterceptor {
     @Override
-    public ClientHttpResponse intercept(
-            HttpRequest request, byte[] body,
-            ClientHttpRequestExecution execution) throws IOException {
+    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+            throws IOException {
 
         //打印请求明细
-        //        logRequestDetails(request, body);
+//        logRequestDetails(request, body);
         ClientHttpResponse response = execution.execute(request, body);
 
         // 包装代理一下 让只能读一次的响应流可以继续向下传递，，，不打印响应体了，就先不包装了
-        //        response = new ClientHttpResponseWrapper(response);
+//        response = new ClientHttpResponseWrapper(response);
 
         //打印响应明细
-        //        logResponseDetails(response);
+//        logResponseDetails(response);
 
         return response;
     }

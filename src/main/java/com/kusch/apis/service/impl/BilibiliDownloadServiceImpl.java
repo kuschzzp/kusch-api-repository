@@ -1,8 +1,9 @@
-package com.kusch.service.impl;
+package com.kusch.apis.service.impl;
 
 import com.kusch.constants.CommonConstants;
 import com.kusch.constants.PlatformConstants;
-import com.kusch.service.DownloadService;
+import com.kusch.apis.service.DownloadService;
+import com.kusch.ex.ApiException;
 import com.kusch.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -45,6 +46,7 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
             bilibili(url, way, response);
         } catch (IOException e) {
             log.error(e.getMessage());
+            throw new ApiException(e.getMessage());
         }
 
     }
@@ -95,7 +97,7 @@ public class BilibiliDownloadServiceImpl implements DownloadService {
             }
         } else {
             response.setHeader("content-type", "text/html;charset=utf-8");
-            response.getWriter().write("该站点不支持使用URL方式！不信你试试：  " + toDownloadUrl);
+            response.getOutputStream().write(("该站点不支持使用URL方式！不信你试试：  " + toDownloadUrl).getBytes());
         }
     }
 
