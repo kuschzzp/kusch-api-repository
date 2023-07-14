@@ -1,8 +1,8 @@
-package com.kusch.apis.service.impl;
+package com.kusch.oldApis.service.impl;
 
 import com.kusch.constants.CommonConstants;
 import com.kusch.constants.PlatformConstants;
-import com.kusch.apis.service.DownloadService;
+import com.kusch.oldApis.service.DownloadService;
 import com.kusch.ex.ApiException;
 import com.kusch.utils.UnicodeUtils;
 import com.kusch.utils.JsonUtils;

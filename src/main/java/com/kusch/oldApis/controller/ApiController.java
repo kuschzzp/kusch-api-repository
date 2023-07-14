@@ -1,7 +1,7 @@
-package com.kusch.apis.controller;
+package com.kusch.oldApis.controller;
 
-import com.kusch.apis.handler.DownloadHandler;
-import com.kusch.apis.service.ClashNodeService;
+import com.kusch.oldApis.handler.DownloadHandler;
+import com.kusch.oldApis.service.ClashNodeService;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.utils.IpUtil;
 import com.kusch.utils.RegxUtils;

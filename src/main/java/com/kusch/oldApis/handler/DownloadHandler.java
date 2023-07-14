@@ -1,6 +1,6 @@
-package com.kusch.apis.handler;
+package com.kusch.oldApis.handler;
 
-import com.kusch.apis.service.DownloadService;
+import com.kusch.oldApis.service.DownloadService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

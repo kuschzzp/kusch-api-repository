@@ -1,6 +1,6 @@
-package com.kusch.apis.service.impl;
+package com.kusch.oldApis.service.impl;
 
-import com.kusch.apis.service.ClashNodeService;
+import com.kusch.oldApis.service.ClashNodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;

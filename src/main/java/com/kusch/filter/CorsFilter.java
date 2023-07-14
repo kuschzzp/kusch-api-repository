@@ -29,7 +29,7 @@ public class CorsFilter implements Filter {
         // 允许指定域访问跨域资源
         response.setHeader("Access-Control-Allow-Origin", "*");
         // 允许所有请求方式
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
         // 有效时间
         response.setHeader("Access-Control-Max-Age", "3600");
         // 允许的header参数

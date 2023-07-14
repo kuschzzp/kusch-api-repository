@@ -1,4 +1,4 @@
-package com.kusch.apis.service;
+package com.kusch.oldApis.service;
 
 /**
  * 定时签到的Service
@@ -15,4 +15,10 @@ public interface SignService {
      */
     void hengHengMaoSign() throws InterruptedException;
 
+    /**
+     * zeabur 七天签到续期
+     *
+     * @throws Exception
+     */
+    void zeaburSign() throws Exception;
 }

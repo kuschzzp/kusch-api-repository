@@ -1,10 +1,10 @@
-package com.kusch.apis.service.impl;
+package com.kusch.oldApis.service.impl;
 
 import cn.hutool.crypto.digest.MD5;
 import com.dtflys.forest.Forest;
 import com.dtflys.forest.http.ForestHeader;
 import com.dtflys.forest.http.ForestResponse;
-import com.kusch.apis.service.SignService;
+import com.kusch.oldApis.service.SignService;
 import com.kusch.utils.UnicodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
+@SuppressWarnings("rawtypes")
 public class SignServiceImpl implements SignService {
 
     private static final Map<String, String> INIT_MAP = new HashMap<>();
@@ -40,6 +41,7 @@ public class SignServiceImpl implements SignService {
             Thread.sleep(6000);
         }
     }
+
 
     private void qiandao(String user, String pass) {
         ForestResponse response =
@@ -91,5 +93,24 @@ public class SignServiceImpl implements SignService {
                 .execute(ForestResponse.class);
         log.info("用户: {}, 签到：{}", user, UnicodeUtils.unicodeDecode(qandao.getContent()));
 
+    }
+
+    @Override
+    public void zeaburSign() throws Exception {
+        String url = "https://gateway.zeabur.com/graphql";
+        String data = "{\"operationName\":\"CheckIn\",\"variables\":{},\"query\":\"mutation CheckIn {\\n  " +
+                "checkIn\\n}\"}";
+
+        ForestResponse execute = Forest.post(url)
+                .addHeader("authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" +
+                        ".eyJhdWQiOiJ6ZWFidXIiLCJqdGkiOiI2NGFiN2MyNjk5NzZlODQ1OTQ3Yjc4ZDYxNjg4OTYwMDM4IiwiaWF0IjoxNjg4OTYwMDM4LCJzdWIiOiI2NGFiN2MyNjk5NzZlODQ1OTQ3Yjc4ZDYiLCJmcm9tIjoiemVhYnVyIiwic2NvcGUiOiJhbGwifQ.2CHIk_R6PqyQ-5oRrTQrQfrHwZfTUdwhdq6fsouJXQI")
+                .addHeader("content-type", "application/json")
+                .addHeader("origin", "https://dash.zeabur.com")
+                .addHeader("referer", "https://dash.zeabur.com/")
+                .addHeader("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, " +
+                        "like Gecko) Chrome/114.0.0.0 Safari/537.36")
+                .addBody(data)
+                .execute(ForestResponse.class);
+        log.info("zeaburSign 签到：{}", execute.getContent());
     }
 }

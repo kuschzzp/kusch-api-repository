@@ -5,14 +5,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.13</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.7.12</version>
+        <relativePath/>
     </parent>
     <groupId>com.kusch</groupId>
     <artifactId>kusch-api-repository</artifactId>
+
     <version>0.0.1</version>
+
     <name>kusch-api-repository</name>
-    <description>kusch-api-repository</description>
+    <description>用来整合常用API</description>
 
     <packaging>jar</packaging>
 
@@ -20,6 +22,7 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,11 +33,7 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -65,46 +64,57 @@
             <version>1.15.3</version>
         </dependency>
 
+        <!-- 开源http框架 -->
         <dependency>
             <groupId>com.dtflys.forest</groupId>
             <artifactId>forest-spring-boot-starter</artifactId>
             <version>1.5.31</version>
         </dependency>
 
-        <!-- ELK相关 -->
-<!--        <dependency>-->
-<!--            <groupId>net.logstash.logback</groupId>-->
-<!--            <artifactId>logstash-logback-encoder</artifactId>-->
-<!--            <version>7.3</version>-->
-<!--        </dependency>-->
-
+        <!-- 参数验证框架 -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <!-- 主要是使用其 JSONObject 便于解析返回的Json对象 -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20230227</version>
         </dependency>
 
+        <!-- 调试ELK相关的包，可用可不用 -->
+        <!--        <dependency>-->
+        <!--            <groupId>net.logstash.logback</groupId>-->
+        <!--            <artifactId>logstash-logback-encoder</artifactId>-->
+        <!--            <version>7.3</version>-->
+        <!--        </dependency>-->
 
-        <!-- 使自定义的配置信息有提示 -->
+
+        <!-- 使自定义的配置信息有提示 封装组件时需要用的jar，为了让配置有提示 这里基本用不到-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+
         <finalName>kusch-api-repository</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <!--生成doc jar包-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -139,6 +149,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 

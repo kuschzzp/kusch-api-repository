@@ -1,9 +1,8 @@
-package com.kusch.apis.service.impl;
+package com.kusch.oldApis.service.impl;
 
-import com.kusch.apis.service.DownloadService;
+import com.kusch.oldApis.service.DownloadService;
 import com.kusch.constants.PlatformConstants;
 import com.kusch.ex.ApiException;
-import com.kusch.result.R;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

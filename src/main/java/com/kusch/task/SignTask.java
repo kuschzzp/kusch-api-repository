@@ -1,6 +1,6 @@
 package com.kusch.task;
 
-import com.kusch.apis.service.SignService;
+import com.kusch.oldApis.service.SignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,16 +16,26 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SignTask {
 
-
     @Autowired
     private SignService service;
 
     /**
      * 早上 9:01 执行
+     *
      * @throws InterruptedException
      */
     @Scheduled(cron = "0 1 9 * * ?")
     public void hengHengMao() throws InterruptedException {
         service.hengHengMaoSign();
+    }
+
+    /**
+     * 早上 9:10 执行
+     *
+     * @throws InterruptedException
+     */
+    @Scheduled(cron = "0 10 9 * * ?")
+    public void zeabur() throws Exception {
+        service.zeaburSign();
     }
 }
